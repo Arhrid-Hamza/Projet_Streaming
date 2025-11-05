@@ -16,6 +16,10 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// Ajouter le contexte EF Core
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
