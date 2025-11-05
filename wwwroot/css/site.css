@@ -20,3 +20,34 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Custom styles for model views */
+.table-responsive {
+  margin-top: 20px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.btn-custom {
+  margin-right: 10px;
+}
+
+.alert {
+  margin-top: 20px;
+}
+
+.thumbnail {
+  max-width: 100px;
+  height: auto;
+}
+
+.video-player {
+  width: 100%;
+  max-width: 600px;
+}

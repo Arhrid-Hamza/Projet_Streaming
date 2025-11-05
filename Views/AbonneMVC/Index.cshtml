@@ -1,0 +1,65 @@
+@model IEnumerable<Projet_Streaming.Models.Abonne>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateExpiration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Abonnement)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateExpiration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Abonnement.Type)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-custom">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-custom">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-custom btn-delete">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
