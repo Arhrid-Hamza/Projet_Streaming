@@ -2,7 +2,171 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-section">
+    <div class="hero-content">
+        <!-- Ajout d'une ligne d'accroche supplémentaire pour l'impact -->
+        <p class="text-xl mb-2 text-gray-200">Watch the future of entertainment now.</p>
+        <h1 class="hero-title">Unlimited movies, TV shows, and more</h1>
+        <p class="hero-subtitle">Watch anywhere. Cancel anytime. Start your 7-day free trial today!</p>
+        <!-- Utilisation d'un bouton de style différent pour l'appel à l'action principal -->
+        <a href="#featured" class="btn btn-light btn-lg shadow-lg">
+            <i class="fas fa-play me-2"></i> Watch Now
+        </a>
+        <a href="#" class="btn btn-outline-primary btn-lg ms-3">
+            More Info
+        </a>
+    </div>
 </div>
+
+<section id="featured" class="content-section">
+    <div class="container-fluid p-0"> <!-- Retirer le padding pour un carrousel bord à bord -->
+        <h2 class="section-title">Featured Films</h2>
+        <div class="row m-0">
+            <div class="col-12 p-0">
+                <div class="content-carousel">
+                    @if (Model.FeaturedFilms != null)
+                    {
+                        @foreach (var film in Model.FeaturedFilms)
+                        {
+                            <div class="content-item">
+                                <div class="content-thumbnail">
+                                    <img src="@(string.IsNullOrEmpty(film.ThumbnailUrl) ? "https://placehold.co/400x250/111827/E50914?text=Film" : film.ThumbnailUrl)"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/400x250/111827/E50914?text=Film';"
+                                         alt="@film.Titre" class="img-fluid">
+                                    <div class="content-overlay">
+                                        <h5>@film.Titre</h5>
+                                        <p>@film.Description?.Substring(0, Math.Min(100, film.Description?.Length ?? 0))...</p>
+                                        <div class="content-meta">
+                                            <span class="badge bg-primary">@film.Categorie?.Nom</span>
+                                            @if (film.ContentGenres != null && film.ContentGenres.Any())
+                                            {
+                                                @foreach (var genre in film.ContentGenres.Take(2))
+                                                {
+                                                    <span class="badge bg-secondary">@genre.Genre?.Nom</span>
+                                                }
+                                            }
+                                        </div>
+                                        <a href="@Url.Action("Details", "FilmMVC", new { id = film.Id })" class="btn btn-primary btn-sm">Watch Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <!-- Placeholders si le modèle est vide -->
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <div class="content-item">
+                                <div class="content-thumbnail">
+                                    <img src="https://placehold.co/400x250/111827/E50914?text=Film+@i" alt="Placeholder Film @i" class="img-fluid">
+                                    <div class="content-overlay">
+                                        <h5>Placeholder Film</h5>
+                                        <p>A short, gripping description of the film content.</p>
+                                        <div class="content-meta">
+                                            <span class="badge bg-primary">Action</span>
+                                            <span class="badge bg-secondary">Drama</span>
+                                        </div>
+                                        <a href="#" class="btn btn-primary btn-sm">Watch Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-section bg-dark">
+    <div class="container-fluid p-0"> <!-- Retirer le padding pour un carrousel bord à bord -->
+        <h2 class="section-title">Featured Series</h2>
+        <div class="row m-0">
+            <div class="col-12 p-0">
+                <div class="content-carousel">
+                    @if (Model.FeaturedSeries != null)
+                    {
+                        @foreach (var serie in Model.FeaturedSeries)
+                        {
+                            <div class="content-item">
+                                <div class="content-thumbnail">
+                                    <img src="@(string.IsNullOrEmpty(serie.ThumbnailUrl) ? "https://placehold.co/400x250/111827/E50914?text=Serie" : serie.ThumbnailUrl)"
+                                        onerror="this.onerror=null;this.src='https://placehold.co/400x250/111827/E50914?text=Serie';"
+                                        alt="@serie.Titre" class="img-fluid">
+                                    <div class="content-overlay">
+                                        <h5>@serie.Titre</h5>
+                                        <p>@serie.Description?.Substring(0, Math.Min(100, serie.Description?.Length ?? 0))...</p>
+                                        <div class="content-meta">
+                                            <span class="badge bg-primary">@serie.Categorie?.Nom</span>
+                                            @if (serie.ContentGenres != null && serie.ContentGenres.Any())
+                                            {
+                                                @foreach (var genre in serie.ContentGenres.Take(2))
+                                                {
+                                                    <span class="badge bg-secondary">@genre.Genre?.Nom</span>
+                                                }
+                                            }
+                                        </div>
+                                        <a href="@Url.Action("Details", "SerieMVC", new { id = serie.Id })" class="btn btn-primary btn-sm">Watch Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <!-- Placeholders si le modèle est vide -->
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <div class="content-item">
+                                <div class="content-thumbnail">
+                                    <img src="https://placehold.co/400x250/111827/E50914?text=Serie+@i" alt="Placeholder Serie @i" class="img-fluid">
+                                    <div class="content-overlay">
+                                        <h5>Placeholder Série</h5>
+                                        <p>A thrilling series with a huge following.</p>
+                                        <div class="content-meta">
+                                            <span class="badge bg-primary">Sci-Fi</span>
+                                            <span class="badge bg-secondary">Mystery</span>
+                                        </div>
+                                        <a href="#" class="btn btn-primary btn-sm">Watch Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <h2 class="section-title text-center">Browse by Category</h2>
+        <div class="row justify-content-center"> <!-- Centrer les cartes -->
+            @if (Model.Categories != null)
+            {
+                @foreach (var category in Model.Categories)
+                {
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4"> <!-- Améliorer la responsivité des cartes -->
+                        <div class="category-card">
+                            <div class="category-content">
+                                <h5>@category.Nom</h5>
+                                <p>@category.Contenus?.Count ?? 0 items</p>
+                                <a href="@Url.Action("Index", "FilmMVC", new { categoryId = category.Id })" class="btn btn-outline-primary btn-sm mt-2">Explore</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container text-center">
+        <h2>Ready to watch?</h2>
+        <p>Join thousands of users enjoying unlimited streaming</p>
+        <a href="@Url.Action("Create", "UtilisateurMVC")" class="btn btn-light btn-lg shadow-lg">Sign Up Now</a>
+    </div>
+</section>

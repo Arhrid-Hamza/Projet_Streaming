@@ -39,9 +39,12 @@ button.accept-policy {
   line-height: inherit;
 }
 
+/* * CORRECTION: Rendre le pied de page statique pour qu'il soit poussé en bas 
+ * par la technique sticky footer dans _Layout.cshtml 
+ */
 .footer {
-  position: absolute;
-  bottom: 0;
+  /* position: absolute; <- Supprimé */
+  /* bottom: 0; <- Supprimé */
   width: 100%;
   white-space: nowrap;
   line-height: 60px;
